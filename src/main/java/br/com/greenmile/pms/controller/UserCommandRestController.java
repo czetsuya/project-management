@@ -6,6 +6,7 @@ import br.com.greenmile.pms.common.dto.UserDTO;
 import br.com.greenmile.pms.common.dto.UserResultDTO;
 import br.com.greenmile.pms.service.UserCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class UserCommandRestController {
     private UserCommandService service;
 
     @PostMapping
+    @CacheEvict(value = "users", allEntries = true)
     public ResponseEntity<UserResultDTO> save(@Valid @RequestBody UserDTO dto) {
         UserResultDTO result = this.service.save(dto);
 
@@ -37,6 +39,7 @@ public class UserCommandRestController {
     }
 
     @PostMapping("/{user-id}/skills")
+    @CacheEvict(value = "skils", allEntries = true, key = "#id")
     public ResponseEntity<SkillResultDTO> save(@PathVariable("user-id") @Min(value = 1, message = MIN_ID_MESSAGE) Long id,
                                               @Valid @RequestBody SkillDTO dto) {
         SkillResultDTO result = this.service.saveSkill(id, dto);

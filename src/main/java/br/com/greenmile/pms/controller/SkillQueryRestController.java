@@ -3,6 +3,8 @@ package br.com.greenmile.pms.controller;
 import br.com.greenmile.pms.entity.Skill;
 import br.com.greenmile.pms.service.SkillQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ public class SkillQueryRestController {
     private SkillQueryService service;
 
     @GetMapping("/{skill-id}")
+    @CachePut(value = "skills", key = "#id")
     public ResponseEntity<Skill> findById(@PathVariable("skill-id") @Min(value = 1, message = MIN_ID_MESSAGE) Long id) {
         if (!this.service.existsById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,6 +43,7 @@ public class SkillQueryRestController {
     }
 
     @GetMapping
+    @CachePut("skills")
     public ResponseEntity<List<Skill>> getAll() {
         List<Skill> skills = this.service.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(skills);

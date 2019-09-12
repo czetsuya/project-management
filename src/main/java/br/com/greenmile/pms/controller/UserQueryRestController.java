@@ -3,6 +3,8 @@ package br.com.greenmile.pms.controller;
 import br.com.greenmile.pms.entity.User;
 import br.com.greenmile.pms.service.UserQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ public class UserQueryRestController {
     private UserQueryService service;
 
     @GetMapping("/{user-id}")
+    @CachePut(value = "users", key = "#id")
     public ResponseEntity<User> findById(@PathVariable("user-id") @Min(value = 1, message = MIN_ID_MESSAGE) Long id) {
         if (!this.service.existsById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -41,6 +44,7 @@ public class UserQueryRestController {
     }
 
     @GetMapping
+    @CachePut(value = "users")
     public ResponseEntity<List<User>> getAll() {
         List<User> users = this.service.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(users);
