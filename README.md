@@ -1,12 +1,32 @@
 # project-management
 API REST do Sistema de Gerenciamento de Projetos
 
+### Recursos utilizados
+* Spring Boot
+* Spring Batch
+* Gradle
+* CQRS
+* Cache
+* PostgreSQL
+* Mockito
+* JUnit
+
 ### Base URL
 ```
 http://localhost:8080/api/v1
 ```
 
-### Testes com Postman
+### Executar
+```
+$ gradle bootRun
+```
+
+### Testes
+```
+$ gradle test
+```
+
+### Testes dos endpoints com Postman
 Aquivo na raiz do projet: project-management.postman_collection.json
 
 
