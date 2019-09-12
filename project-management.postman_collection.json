@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Bruno\",\n\t\"email\": \"bruno@gmail.com\",\n\t\"skills\": [\n\t\t{\n\t\t\t\"name\": \"Fullstack\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"DevOps\"\n\t\t}\n\t]\n}"
+					"raw": "{\n\t\"name\": \"Bruno\",\n\t\"email\": \"bruno@gmail.com\"\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/api/v1/users",
