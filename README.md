@@ -27,7 +27,7 @@ $ gradle test
 ```
 
 ### Testes dos endpoints com Postman
-Aquivo na raiz do projet: project-management.postman_collection.json
+Aquivo na raiz do projeto: project-management.postman_collection.json
 
 
 ### Criar banco de dados no PostgreSQL
